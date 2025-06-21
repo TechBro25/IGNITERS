@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Services | IGDC</title>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+     * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  font-size: 1.3rem; /* Increased font base */
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1.3em;
+}
+
+    body.dark-mode {
+      background: #121212;
+      color: #f5f5f5;
+    }
+
+    body.dark-mode nav {
+      background: #1e1e1e;
+    }
+
+    body.dark-mode section,
+    body.dark-mode footer {
+      background: #222;
+      color: #ddd;
+    }
+
+    nav {
+      background: #722F37;
+      padding: 15px 10px;
+      text-align: left;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    nav a:hover {
+      color: #FFD1D4;
+      text-decoration: underline;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.3em;
+      cursor: pointer;
+    }
+
+    header {
+      padding: 50px 20px;
+      text-align: center;
+      background: linear-gradient(to right, #722F37, #FFD1D4, #fff);
+    }
+
+    header h1 {
+      font-size: 2.6em;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1em;
+      color: #fff;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    section {
+      padding: 50px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2em;
+      color: #722F37;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .service-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.06);
+      transition: 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-card i {
+      font-size: 2em;
+      color: #722F37;
+      margin-bottom: 10px;
+    }
+
+    .service-card h3 {
+      margin: 10px 0 8px;
+      color: #722F37;
+    }
+
+    .service-card p {
+      font-size: 0.95em;
+      color: #444;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 10px 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+<a href="menu.html" class="menu-link"><i class="fa-solid fa-bars"></i></a>
+    <button class="toggle-btn" onclick="toggleDarkMode()"></button>
+  </nav>
+
+  <header>
+    <h1>Our Services</h1>
+    <p>Explore the wide range of digital, creative, and technical services we offer at IGDC.</p>
+  </header>
+
+  <section>
+    <h2>Creative Services</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <i class="fas fa-camera-retro"></i>
+        <h3>Photography</h3>
+        <p>Capture professional photos for events, branding, and visual storytelling.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-video"></i>
+        <h3>Video Editing</h3>
+        <p>Transform your footage into engaging, polished video content.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-paint-brush"></i>
+        <h3>Graphic Design</h3>
+        <p>Creative designs for logos, flyers, banners, and business branding.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tech Services</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <i class="fas fa-laptop-code"></i>
+        <h3>Computer Sales & Repairs</h3>
+        <p>We supply and repair computers with quality parts and expert care.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-globe"></i>
+        <h3>Website & App Development</h3>
+        <p>Custom websites and mobile apps for all purposes and industries.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-network-wired"></i>
+        <h3>Network & ICT Installation</h3>
+        <p>Efficient Wi-Fi and ICT infrastructure for homes, schools, and businesses.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-download"></i>
+        <h3>Software Installation</h3>
+        <p>OS, Office, antivirus, and drivers — installed and updated professionally.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-plug-circle-bolt"></i>
+        <h3>Tech Gadgets</h3>
+        <p>We sell affordable tech tools — mics, ring lights, hubs, coolers, and more.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Business & Media</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <i class="fab fa-facebook-messenger"></i>
+        <h3>Social Media Management</h3>
+        <p>We grow and manage pages for Facebook, Instagram, TikTok, and more.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-bullhorn"></i>
+        <h3>Business Branding</h3>
+        <p>From logo to print materials, we shape your identity and online presence.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <h3>Cloud & Backup</h3>
+        <p>Secure backup and file storage using platforms like Google Drive and OneDrive.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Training & Consultancy</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <h3>Digital Training</h3>
+        <p>ICT, typing, coding, and tech skills for students, youth, and beginners.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-user-tie"></i>
+        <h3>IT Consultancy</h3>
+        <p>We guide individuals and businesses on how to use tech effectively.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 IGDC - Igniters Computers & Digital Communications. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const mode = document.body.classList.contains("dark-mode") ? "enabled" : "disabled";
+      localStorage.setItem("darkMode", mode);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+      }
+    });
+  </script>
+
+</body>
+</html>

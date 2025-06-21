@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Reviews</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      background: #4B0010;
+      color: #4B0010;
+      font-size: 1.1rem;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px 10px;
+      color: #fff;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .review-form, .reviews {
+      width: 100%;
+      background: #fff;
+      color: #4B0010;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(255,255,255,0.15);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 5px;
+      margin: 10px 0;
+    }
+
+    .star {
+      font-size: 24px;
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .star.active {
+      color: gold;
+    }
+
+    button {
+      background: #4B0010;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #60001a;
+    }
+
+    .review {
+      background: #fff;
+      color: #4B0010;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 8px rgba(255,255,255,0.1);
+    }
+
+    .review .name {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .review .stars {
+      margin-top: 5px;
+    }
+
+    .review .text {
+      margin-top: 8px;
+    }
+
+    .delete-btn {
+      margin-top: 10px;
+      font-size: 13px;
+      background: #900;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .review-form, .reviews {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌟 Leave a Review</h1>
+
+  <div class="container">
+    <div class="review-form">
+      <input type="text" id="name" placeholder="Your Name" />
+      <div class="stars" id="starSelect">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </div>
+      <textarea id="message" rows="4" placeholder="Write your review..."></textarea>
+      <button onclick="submitReview()">Post Review</button>
+    </div>
+
+    <div class="reviews" id="reviewsContainer"></div>
+  </div>
+
+  <script>
+    let selectedRating = 0;
+
+    document.querySelectorAll('.star').forEach(star => {
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.getAttribute('data-value'));
+        updateStars(selectedRating);
+      });
+    });
+
+    function updateStars(rating) {
+      document.querySelectorAll('.star').forEach(star => {
+        star.classList.toggle('active', parseInt(star.getAttribute('data-value')) <= rating);
+      });
+    }
+
+    function submitReview() {
+      const name = document.getElementById('name').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !message || selectedRating === 0) {
+        alert("Please fill all fields and select a star rating.");
+        return;
+      }
+
+      const review = {
+        id: Date.now(),
+        name,
+        message,
+        rating: selectedRating
+      };
+
+      let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+      reviews.unshift(review);
+      localStorage.setItem('reviews', JSON.stringify(reviews));
+
+      document.getElementById('name').value = '';
+      document.getElementById('message').value = '';
+      selectedRating = 0;
+      updateStars(0);
+
+      displayReviews();
+    }
+
+    function displayReviews() {
+      const reviewsContainer = document.getElementById('reviewsContainer');
+      reviewsContainer.innerHTML = '';
+      let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+
+      reviews.forEach(review => {
+        const div = document.createElement('div');
+        div.className = 'review';
+        div.innerHTML = `
+          <div class="name">${review.name}</div>
+          <div class="stars">${'&#9733;'.repeat(review.rating)}${'&#9734;'.repeat(5 - review.rating)}</div>
+          <div class="text">${review.message}</div>
+          <button class="delete-btn" onclick="deleteReview(${review.id})">Delete</button>
+        `;
+        reviewsContainer.appendChild(div);
+      });
+    }
+
+    function deleteReview(id) {
+      let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+      reviews = reviews.filter(r => r.id !== id);
+      localStorage.setItem('reviews', JSON.stringify(reviews));
+      displayReviews();
+    }
+
+    displayReviews();
+  </script>
+
+</body>
+</html>

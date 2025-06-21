@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Latest Updates</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  font-size: 1.3rem; /* Increased font base */
+  font-family: 'Segoe UI', sans-serif;
+  background: #4B0010;
+  color: #4B0010;
+  line-height: 1.6;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1.3em;
+}
+
+    h1 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+
+    .updates {
+      max-width: 900px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      padding: 20px;
+      position: relative;
+    }
+
+    .card h3 {
+      color: #4B0010;
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      margin: 0 0 15px;
+    }
+
+    .media-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .media-group img,
+    .media-group video {
+      width: calc(50% - 8px);
+      border-radius: 10px;
+      max-height: 280px;
+      object-fit: cover;
+    }
+
+    .media-group video {
+      background: #000;
+    }
+
+    .like-btn {
+      margin-top: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #555;
+      font-size: 16px;
+      user-select: none;
+    }
+
+    .like-btn.liked {
+      color: red;
+    }
+
+    .like-btn svg {
+      width: 20px;
+      height: 20px;
+      transition: 0.2s;
+      fill: currentColor;
+    }
+
+    @media (max-width: 600px) {
+      .media-group img,
+      .media-group video {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📢 Latest Updates</h1>
+
+  <div class="updates">
+
+    <!-- 🔥 Update 1
+    <div class="card" data-id="update1">
+      <h3>New Product Launch – Game Station</h3>
+      <p>We just launched a new game station with ultra-fast loading, RGB lighting, and VR support. See photos and demo below:</p>
+      <div class="media-group">
+        <img src="updates/game1.jpg" alt="Game Station 1">
+        <img src="updates/game2.jpg" alt="Game Station 2">
+        <video controls src="updates/demo1.mp4"></video>
+        <video controls src="updates/demo2.mp4"></video>
+      </div>
+      <div class="like-btn" onclick="toggleLike(this, 'update1')">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+        2 5.42 4.42 3 7.5 3c1.74 0 
+        3.41 0.81 4.5 2.09C13.09 
+        3.81 14.76 3 16.5 3 19.58 
+        3 22 5.42 22 8.5c0 3.78-3.4 
+        6.86-8.55 11.54L12 21.35z"/></svg>
+        <span class="like-count">0</span> Like
+      </div>
+    </div> -->
+
+    <!-- 🧊 Update 2
+    <div class="card" data-id="update2">
+      <h3>Smart Cooler & LED Setup</h3>
+      <p>Upgrade your mobile and desktop setup with our smart coolers and LED kits.</p>
+      <div class="media-group">
+        <img src="updates/cooler1.jpg" alt="Cooler 1">
+        <img src="updates/led1.jpg" alt="LED Light">
+        <video controls src="updates/cooler-video.mp4"></video>
+      </div>
+      <div class="like-btn" onclick="toggleLike(this, 'update2')">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+        2 5.42 4.42 3 7.5 3c1.74 0 
+        3.41 0.81 4.5 2.09C13.09 
+        3.81 14.76 3 16.5 3 19.58 
+        3 22 5.42 22 8.5c0 3.78-3.4 
+        6.86-8.55 11.54L12 21.35z"/></svg>
+        <span class="like-count">0</span> Like
+      </div>
+    </div> -->
+
+    <!-- ➕ Update 3 -->
+    <div class="card" data-id="update3">
+      <h3>Tech Event</h3>
+      <p>Don't miss this great Tech Event</p>
+      <div class="media-group">
+        <img src="img/WhatsApp Image 2025-06-19 at 16.59.34_c02df754.jpg" alt="Banner 1">
+        <img src="img/WhatsApp Image 2025-06-19 at 16.59.35_e42163b5.jpg" alt="Banner 2">
+        <img src="img/WhatsApp Image 2025-06-20 at 22.26.16_eb6c630e.jpg" alt="Banner 3 ">
+                <img src="img/WhatsApp Image 2025-06-20 at 22.26.18_d5400858.jpg" alt="Banner 4 ">
+      </div>
+      <div class="like-btn" onclick="toggleLike(this, 'update3')">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+        2 5.42 4.42 3 7.5 3c1.74 0 
+        3.41 0.81 4.5 2.09C13.09 
+        3.81 14.76 3 16.5 3 19.58 
+        3 22 5.42 22 8.5c0 3.78-3.4 
+        6.86-8.55 11.54L12 21.35z"/></svg>
+        <span class="like-count">0</span> Like
+      </div>
+      
+    </div>
+    
+
+  </div>
+
+  <script>
+    function toggleLike(button, id) {
+      const key = "like_" + id;
+      let liked = localStorage.getItem(key) === "true";
+      const countSpan = button.querySelector(".like-count");
+      let count = parseInt(countSpan.textContent);
+
+      if (liked) {
+        localStorage.setItem(key, "false");
+        button.classList.remove("liked");
+        countSpan.textContent = count - 1;
+      } else {
+        localStorage.setItem(key, "true");
+        button.classList.add("liked");
+        countSpan.textContent = count + 1;
+      }
+      localStorage.setItem(key + "_count", countSpan.textContent);
+    }
+
+    // Load likes on page load
+    window.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".card").forEach(card => {
+        const id = card.getAttribute("data-id");
+        const liked = localStorage.getItem("like_" + id) === "true";
+        const count = localStorage.getItem("like_" + id + "_count") || "0";
+        const btn = card.querySelector(".like-btn");
+        const countSpan = btn.querySelector(".like-count");
+        countSpan.textContent = count;
+        if (liked) {
+          btn.classList.add("liked");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

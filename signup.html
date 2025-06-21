@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login & Signup</title>
+  <style>
+    body {
+      background: #4B0010;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #722F37;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      background: #722F37;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #591d24;
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 15px;
+      color: #722F37;
+      cursor: pointer;
+      font-size: 0.95em;
+    }
+
+    .message {
+      color: red;
+      text-align: center;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2 id="formTitle">Sign Up</h2>
+
+    <div class="message" id="msg"></div>
+
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+
+    <button id="submitBtn" onclick="handleAction()">Create Account</button>
+
+    <div class="toggle" onclick="toggleForm()">Already have an account? Login</div>
+  </div>
+
+  <script>
+    let isLogin = false;
+
+    function toggleForm() {
+      const title = document.getElementById('formTitle');
+      const btn = document.getElementById('submitBtn');
+      const toggleText = document.querySelector('.toggle');
+      const msg = document.getElementById('msg');
+      msg.innerText = '';
+
+      isLogin = !isLogin;
+
+      if (isLogin) {
+        title.innerText = 'Login';
+        btn.innerText = 'Login';
+        toggleText.innerText = "Don't have an account? Sign Up";
+      } else {
+        title.innerText = 'Sign Up';
+        btn.innerText = 'Create Account';
+        toggleText.innerText = 'Already have an account? Login';
+      }
+    }
+
+    function handleAction() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const msg = document.getElementById('msg');
+
+      if (!email || !password) {
+        msg.innerText = "Please fill all fields.";
+        return;
+      }
+
+      if (isLogin) {
+        const saved = localStorage.getItem(email);
+        if (!saved) {
+          msg.innerText = "No account found with this email.";
+          return;
+        }
+        if (saved !== password) {
+          msg.innerText = "Incorrect password.";
+          return;
+        }
+
+        msg.innerText = "Login successful! Redirecting...";
+        msg.classList.add("success");
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1500);
+
+      } else {
+        if (localStorage.getItem(email)) {
+          msg.innerText = "Account already found, go and login.";
+          return;
+        }
+
+        localStorage.setItem(email, password);
+        msg.innerText = "Account created! Redirecting...";
+        msg.classList.add("success");
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1500);
+      }
+    }
+  </script>
+
+</body>
+</html>
