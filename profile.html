@@ -2,173 +2,139 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>User Profile</title>
   <style>
-    * {
+    body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background:  #4B0010;
-      color: #333;
-      font-size: 1.3rem;
-    }
-
-    .center-wrapper {
+      background-color: #4B0010;
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      padding: 20px;
+      min-height: 100vh;
     }
 
-    .profile-card {
-      background: #fff;
-      color: #4B0010;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    .profile-container {
+      background: rgba(255, 255, 255, 0.05);
       padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
       width: 90%;
-      max-width: 420px;
+      max-width: 500px;
+    }
+
+    .profile-pic-container {
       text-align: center;
+      margin-bottom: 20px;
     }
 
-    .profile-card img {
-      width: 120px;
-      height: 120px;
+    .profile-pic-container img {
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
+      border: 3px solid #fff;
       object-fit: cover;
-      border: 4px solid #4B0010;
-      margin-bottom: 10px;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
-    .profile-card input,
-    .profile-card textarea,
-    .profile-card select {
+    .profile-pic-container input {
+      display: none;
+    }
+
+    form input, form select {
       width: 100%;
       padding: 10px;
-      margin: 7px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    .profile-card button {
-      margin-top: 15px;
-      padding: 10px 20px;
+      margin: 10px 0;
       border: none;
-      background: #4B0010;
-      color: white;
-      border-radius: 8px;
-      font-size: 14px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    form input:focus, form select:focus {
+      outline: none;
+      background: #f0f0f0;
+      color: #000;
+    }
+
+    .save-btn {
+      width: 100%;
+      padding: 12px;
+      background: #fff;
+      color: #4B0010;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
+      transition: 0.3s;
     }
 
-    .profile-card button:hover {
-      background: #60001a;
+    .save-btn:hover {
+      background: #eee;
     }
 
-    .logout {
-      background: gray;
-      margin-top: 10px;
-    }
-
-    @media (max-height: 500px) {
-      .center-wrapper {
-        align-items: flex-start;
-        padding-top: 30px;
-      }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
+  <div class="profile-container">
+    <div class="profile-pic-container">
+      <label for="profile-upload">
+        <img src="https://via.placeholder.com/130" id="profile-img" alt="Profile Picture" />
+        <input type="file" id="profile-upload" accept="image/*" />
+      </label>
+    </div>
 
-  <div class="center-wrapper">
-    <div class="profile-card">
-      <h2>Edit Your Profile</h2>
-      <img id="preview" src="https://ui-avatars.com/api/?name=User&background=4B0010&color=fff" alt="Profile Photo" />
-      
-      <input type="file" id="photoInput" accept="image/*">
-      <input type="text" id="name" placeholder="Full Name" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="tel" id="phone" placeholder="Phone Number">
-      <select id="country">
-        <option value="">Select Country</option>
+    <h2>User Profile</h2>
+    <form id="profile-form">
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email Address" required />
+      <input type="tel" placeholder="Phone Number" required />
+      <input type="date" placeholder="Date of Birth" required />
+      <select required>
+        <option value="" disabled selected>Select Country</option>
         <option>Nigeria</option>
         <option>Ghana</option>
         <option>Kenya</option>
         <option>South Africa</option>
-        <option>USA</option>
+        <option>Other</option>
       </select>
-      <textarea id="bio" placeholder="Write a short bio..." rows="3"></textarea>
-      
-      <button onclick="saveProfile()">💾 Save Profile</button>
-      <button class="logout" onclick="logout()">Logout</button>
-    </div>
+      <select required>
+        <option value="" disabled selected>Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+      <button type="submit" class="save-btn">Save Profile</button>
+    </form>
   </div>
 
   <script>
-    const currentEmail = localStorage.getItem("currentUserEmail");
-    let users = JSON.parse(localStorage.getItem("users") || "[]");
-    let currentUser = users.find(u => u.email === currentEmail);
+    // Profile picture upload
+    const uploadInput = document.getElementById("profile-upload");
+    const profileImg = document.getElementById("profile-img");
 
-    if (!currentUser) {
-      window.location.href = "login.html";
-    }
-
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const phoneInput = document.getElementById("phone");
-    const countryInput = document.getElementById("country");
-    const bioInput = document.getElementById("bio");
-    const preview = document.getElementById("preview");
-
-    nameInput.value = currentUser.name || "";
-    emailInput.value = currentUser.email || "";
-    phoneInput.value = currentUser.phone || "";
-    countryInput.value = currentUser.country || "";
-    bioInput.value = currentUser.bio || "";
-    if (currentUser.photo) {
-      preview.src = currentUser.photo;
-    }
-
-    document.getElementById("photoInput").addEventListener("change", function () {
+    uploadInput.addEventListener("change", function () {
       const file = this.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-          preview.src = e.target.result;
+          profileImg.src = e.target.result;
         };
         reader.readAsDataURL(file);
       }
     });
 
-    function saveProfile() {
-      currentUser.name = nameInput.value.trim();
-      currentUser.email = emailInput.value.trim();
-      currentUser.phone = phoneInput.value.trim();
-      currentUser.country = countryInput.value;
-      currentUser.bio = bioInput.value.trim();
-      currentUser.photo = preview.src;
-
-      users = users.map(u => u.email === currentEmail ? currentUser : u);
-      localStorage.setItem("users", JSON.stringify(users));
-      localStorage.setItem("currentUserEmail", currentUser.email);
-
-      alert("✅ Profile saved successfully!");
-    }
-
-    function logout() {
-      localStorage.removeItem("currentUserEmail");
-      window.location.href = "login.html";
-    }
+    // Form submission (just logs input values for now)
+    document.getElementById("profile-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Profile saved successfully!");
+    });
   </script>
 </body>
 </html>
